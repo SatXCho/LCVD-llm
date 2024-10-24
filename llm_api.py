@@ -131,8 +131,7 @@ def get_qa_chain(session_id: str):
 # API Endpoints
 @app.get("/")
 async def root():
-    """Root endpoint to verify API is running"""
-    return {"message": "RAG API is running"}
+    return {"message": "plant LLM"}
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
