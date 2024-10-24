@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:8000
+@sessionId = test-session-123
+
+### Health check - Get API documentation
+GET {{baseUrl}}/docs
+Accept: application/json
+
+### Chat with the RAG system
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+    "question": "What is this document about?",
+    "session_id": "{{sessionId}}"
+}
+
+### Ask a follow-up question
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+    "question": "What is a chilli leaf curl disease?",
+    "session_id": "{{sessionId}}"
+}
+
+### Ask a specific question
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+    "question": "What are the main topics covered in the first section?",
+    "session_id": "{{sessionId}}"
+}
+
+### Clear chat history for a session
+DELETE {{baseUrl}}/clear-history/{{sessionId}}
+Accept: application/json
+
+### Force reinitialization of the RAG system
+POST {{baseUrl}}/reinitialize
+Accept: application/json
+
+### Test with a different session
+# @name newSession
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+    "question": "What is this document about?",
+    "session_id": "another-session-456"
+}
+
+### Clear history for the new session
+DELETE {{baseUrl}}/clear-history/another-session-456
+Accept: application/json
